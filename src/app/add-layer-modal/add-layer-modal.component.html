@@ -1,0 +1,27 @@
+<button #editLayerButton mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="editLayerDialog.show()">Edit Layer</button>
+
+<mdl-dialog #editLayerDialog [mdl-dialog-config]="{
+  clickOutsideToClose: false,
+  styles:{'width': '300px'},
+  isModal:true,
+  openFrom: editLayerButton,
+  enterTransitionDuration: 300,
+  leaveTransitionDuration: 300}" (show)="onDialogShow(dialogRef)" (hide)="onDialogHide()">
+  <!-- <h3 class="mdl-dialog__title">Add layer</h3> -->
+  <div class="mdl-dialog__content">
+    <mdl-textfield #layerNameField type="text" [(ngModel)]="layerName" label="Layer name" floating-label autofocus></mdl-textfield>
+    <mdl-select label="Layer format" [(ngModel)]="layerFormat" floating-label autofocus>
+      <mdl-option *ngFor="let format of formats" [value]="format">{{format}}</mdl-option>
+    </mdl-select>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+      <input class="mdl-textfield__input" placeholder="File" type="text" value="{{ layerFileName }}" />
+      <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+        <i class="material-icons">attach_file</i><input type="file" (change)="doFileChange($event)" #uploadBtn>
+      </div>
+    </div>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button mdl-button (click)="saveLayer()" mdl-button-type="raised" mdl-colored="primary" mdl-ripple>Save</button>
+    <button mdl-button (click)="editLayerDialog.close()" mdl-ripple>Cancel</button>
+  </div>
+</mdl-dialog>

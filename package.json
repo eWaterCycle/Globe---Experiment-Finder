@@ -1,0 +1,52 @@
+{
+  "name": "regis-v2",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "peerDependencies": {},
+  "dependencies": {
+    "@types/geojson": "^7946.0.2",
+    "angular-cesium": "0.0.48"
+  },
+  "devDependencies": {
+    "@angular-mdl/core": "^4.0.8",
+    "@angular-mdl/popover": "^0.10.0",
+    "@angular-mdl/select": "^0.13.0",
+    "@angular/animations": "^5.1.2",
+    "@angular/cdk": "^5.1.2",
+    "@angular/cli": "^1.7.3",
+    "@angular/common": "^5.1.2",
+    "@angular/compiler": "^5.1.2",
+    "@angular/compiler-cli": "5.1.2",
+    "@angular/core": "^2.3.0 || ^4.0.0 || ^5.1.2",
+    "@angular/forms": "^5.1.2",
+    "@angular/http": "^5.1.2",
+    "@angular/language-service": "^5.1.2",
+    "@angular/material": "^5.1.2",
+    "@angular/platform-browser": "^5.1.2",
+    "@angular/platform-browser-dynamic": "^5.1.2",
+    "@angular/router": "^5.1.2",
+    "@types/jasmine": "2.5.46",
+    "@types/node": "^7.0.18",
+    "angular2-uuid": "^1.1.1",
+    "cesium": "^1.41.0",
+    "codelyzer": "^4.0.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "rxjs": "^5.5.7",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.5.0",
+    "typescript": "^2.7.2",
+    "zone.js": "^0.8.20"
+  }
+}

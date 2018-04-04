@@ -1,0 +1,26 @@
+<div class="demo-container demo-layout-transparent interface-mute">
+    <app-regis-layout #regisLayout1="regisLayout">
+       <mdl-layout-header mdl-layout-header-transparent>
+          <mdl-layout-header-row>
+             <mdl-layout-title>Title</mdl-layout-title>
+             <mdl-layout-spacer></mdl-layout-spacer>
+             <nav class="mdl-navigation interface-clickable">
+                <a class="mdl-navigation__link">Link 1</a>
+                <a class="mdl-navigation__link">Link 2</a>
+                <a class="mdl-navigation__link">Link 3</a>
+             </nav>
+          </mdl-layout-header-row>
+       </mdl-layout-header>
+       <mdl-layout-drawer #menuDrawer>
+          <mdl-layout-title>Menu</mdl-layout-title>
+          <nav class="mdl-navigation interface-clickable">
+            <app-layer-selector></app-layer-selector>
+            <app-model-selector></app-model-selector>
+            <app-simulation-selector></app-simulation-selector>
+          </nav>
+       </mdl-layout-drawer>
+       <mdl-layout-content>
+          <router-outlet></router-outlet>
+       </mdl-layout-content>
+    </app-regis-layout>
+</div>
