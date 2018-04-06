@@ -1,10 +1,20 @@
-<!-- <ac-map-layer-provider #blackmarble *ngIf="appSettingsService.showMapLayer" [provider]="MapLayerProviderOptions.MapTileService"
+<ac-map-layer-provider id='blackmarble' *ngIf="appSettingsService.showMapLayer" [provider]="MapLayerProviderOptions.WebMapService"
   [alpha]="0.5" [options]="{
-       url :  '//cesiumjs.org/tilesets/imagery/blackmarble',
-       maximumLevel : 8,
-       flipXY : true
+       url :  'http://forecast.ewatercycle.org/ncWMS-2.0-rc1/wms?',
+       service: 'WMS',
+       version: '1.3.0',
+       request: 'GetMap',
+       CRS: 'CRS%3A84',
+       styles: 'default-scalar%2Fdefault',
+       format: 'image%2Fpng',
+       LOGSCALE: true,
+       time: '2017-11-30T00:00:00.000Z',
+       colorscalerange: '1,92546.97',
+       abovemaxcolor: 'extend',
+       belowmincolor: 'extend',
+       layers: '1/discharge'
    }">
-</ac-map-layer-provider> -->
+</ac-map-layer-provider>
 
 
 <!-- <ac-map-layer-provider *ngIf="appSettingsService.showMapLayer" [provider]="MapLayerProviderOptions.ArcGisMapServer" [alpha]="0.5" [options]="{

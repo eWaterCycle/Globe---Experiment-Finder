@@ -32,13 +32,33 @@ export class WatershedsLoadingService {
         // return this.http.get<FeatureCollection<Polygon, MyProperties>>('./assets/test.json');
     }
 
+    private makeAcNotification(id, hierarchy, outlineColor, fillColor): AcNotification {
+        const notification: AcNotification = {
+            id: id,
+            entity: new AcEntity({
+                name: 'BASIN ID: ' + id,
+                hierarchy: hierarchy,
+                material: fillColor,
+                height: 0,
+                // extrudedHeight: 100000,
+                outlineColor: outlineColor,
+                outline: true
+            }),
+            actionType: ActionType.ADD_UPDATE
+        };
+        return notification;
+    }
+
     public loadGeoJSON(data: FeatureCollection<Polygon, MyProperties>): Observable<AcNotification> {
         const polygons: AcNotification[] = [];
 
         data.features.map((feature: Feature<Polygon, MyProperties>) => {
-            if (feature && feature.geometry && feature.geometry.coordinates) {
-                const coords = [];
+            let hierarchy = {positions: {}, holes: []};
+            const fillColor = Cesium.Color.BLUE.withAlpha(0.01);
+
+            if (feature && feature.geometry && feature.geometry.coordinates && Number.parseFloat(feature.properties.AREA_SQKM) > 200.0) {
                 if (feature.geometry.type === 'Polygon') {
+                    const coords = [];
                     feature.geometry.coordinates.map((outer, i) => {
                         // The last index is a duplicate of the first in these polygons, so discard it.
                         if (i < outer.length - 1) {
@@ -48,37 +68,32 @@ export class WatershedsLoadingService {
                             });
                         }
                     });
+                    hierarchy = { positions: Cesium.Cartesian3.fromDegreesArray(coords), holes: [] };
                 } else if (feature.geometry.type === 'MultiPolygon') {
-                    const positions = [];
-                    // The last index is a duplicate of the first in these polygons, so discard it.
-                    feature.geometry.coordinates.map(outer => {
+                    // fillColor = Cesium.Color.RED.withAlpha(0.5);
+                    feature.geometry.coordinates.map((outer, j) => {
+                        const coords = [];
                         // Multipolygons are one level deeper
                         outer.map((middle, i) => {
-                            if (i < middle.length - 1) {
-                                middle.map(inner => {
-                                    coords.push(inner[0]);
-                                    coords.push(inner[1]);
-                                });
+                            middle.map(inner => {
+                                coords.push(inner[0]);
+                                coords.push(inner[1]);
+                            });
+                            if (i === 0) {
+                                hierarchy.positions = Cesium.Cartesian3.fromDegreesArray(coords);
+                            } else {
+                                // hierarchy.holes.push({positions: Cesium.Cartesian3.fromDegreesArray(coords)});
                             }
                         });
                     });
                 }
-                const hierarchy = { positions: Cesium.Cartesian3.fromDegreesArray(coords) };
 
-                const polygon: AcNotification = {
-                    id: feature.properties.BASIN_ID.toString(),
-                    entity: new AcEntity({
-                        hierarchy: hierarchy,
-                        material: Cesium.Color.BLUE.withAlpha(0.0),
-                        height: 0,
-                        // extrudedHeight: 100000,
-                        outlineColor: Cesium.Color.WHITE,
-                        outline: true
-                    }),
-                    actionType: ActionType.ADD_UPDATE
-                };
-
-                polygons.push(polygon);
+                polygons.push(this.makeAcNotification(
+                    feature.properties.BASIN_ID.toString(),
+                    hierarchy,
+                    Cesium.Color.WHITE,
+                    fillColor
+                ));
             }
         });
 

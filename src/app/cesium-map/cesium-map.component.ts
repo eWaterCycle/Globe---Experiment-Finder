@@ -15,6 +15,7 @@ import { MapLayerProviderOptions } from '../models/map-layer-provider-options.en
 })
 export class CesiumMapComponent implements AfterViewInit, OnInit {
   sceneMode = SceneMode.SCENE3D;
+  private viewer;
 
   constructor(private viewerConf: ViewerConfiguration,
     private appSettingsService: AppSettingsService) {
@@ -34,6 +35,7 @@ export class CesiumMapComponent implements AfterViewInit, OnInit {
     };
 
     viewerConf.viewerModifier = (viewer) => {
+      this.viewer = viewer;
       viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
       viewer.bottomContainer.remove();
     };
@@ -43,5 +45,9 @@ export class CesiumMapComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
+  }
+
+  public getViewer() {
+    return this.viewer;
   }
 }

@@ -8,7 +8,7 @@ import { MdlSelectModule } from '@angular-mdl/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AngularCesiumModule } from 'angular-cesium';
+import { AngularCesiumModule, MapsManagerService } from 'angular-cesium';
 import { CesiumMapComponent } from './cesium-map/cesium-map.component';
 import { ProjectlogoComponent } from './projectlogo/projectlogo.component';
 import { MapsLayerComponent } from './map-layer/maps-layer.component';
@@ -58,7 +58,7 @@ const routes: Routes = [];
     AngularCesiumModule.forRoot()
   ],
   // entryComponents: [ AddLayerModalComponent ],
-  providers: [LayerService, WatershedsLoadingService],
+  providers: [LayerService, WatershedsLoadingService, MapsManagerService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

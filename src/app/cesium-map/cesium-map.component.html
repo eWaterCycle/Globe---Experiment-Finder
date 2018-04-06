@@ -1,5 +1,5 @@
 <div id='cesiumContainer'>
-  <ac-map>
+  <ac-map [sceneMode]="sceneMode" id="main-map">
     <app-maps-layer></app-maps-layer>
     <app-3d-tile-layer></app-3d-tile-layer>
     <keyboard-control-layer *ngIf="appSettingsService.keyboardControl"></keyboard-control-layer>
