@@ -11,14 +11,16 @@
              </nav>
           </mdl-layout-header-row>
        </mdl-layout-header>
-       <mdl-layout-drawer #menuDrawer>
-          <mdl-layout-title>Menu</mdl-layout-title>
+       <app-mdl-drawer-right #menuDrawer>
+       <!-- <mdl-layout-drawer #menuDrawer> -->
+          <!-- <mdl-layout-title>Menu</mdl-layout-title>
           <nav class="mdl-navigation interface-clickable">
             <app-layer-selector></app-layer-selector>
             <app-model-selector></app-model-selector>
             <app-simulation-selector></app-simulation-selector>
-          </nav>
-       </mdl-layout-drawer>
+          </nav> -->
+        </app-mdl-drawer-right>
+       <!-- </mdl-layout-drawer> -->
        <mdl-layout-content>
           <router-outlet></router-outlet>
        </mdl-layout-content>

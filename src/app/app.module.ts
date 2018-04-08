@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MdlModule, MdlIconModule } from '@angular-mdl/core';
-import { MdlPopoverModule } from '@angular-mdl/popover';
-import { MdlSelectModule } from '@angular-mdl/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {
+  MatButtonModule, MatCheckboxModule, MatMenuModule,
+  MatSidenavModule, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { AngularCesiumModule, MapsManagerService } from 'angular-cesium';
@@ -47,19 +49,23 @@ const routes: Routes = [];
     WatershedsLayerComponent
   ],
   imports: [
-    MdlModule,
-    MdlIconModule,
-    MdlPopoverModule,
-    MdlSelectModule,
     FormsModule,
     BrowserModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatDialogModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     AngularCesiumModule.forRoot()
   ],
-  // entryComponents: [ AddLayerModalComponent ],
-  providers: [LayerService, WatershedsLoadingService, MapsManagerService],
+  providers: [LayerService,
+    WatershedsLoadingService,
+    MapsManagerService,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
+  ],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
